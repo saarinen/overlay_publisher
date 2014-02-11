@@ -3,7 +3,6 @@ require 'github_api'
 module OverlayPublisher
   class Github
     def self.register_webhooks(repo_config, hook_url)
-      validate_config(repo_config)
       configure(repo_config)
 
       begin
@@ -27,7 +26,7 @@ module OverlayPublisher
     # Configure the github api
     def self.configure(repo_config)
       # Validate required config
-      raise 'Configuration github_overlays.basic_auth not set'
+      validate_config(repo_config)
 
       ::Github.configure do |github_config|
         github_config.endpoint    = repo_config['endpoint']

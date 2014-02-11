@@ -21,7 +21,7 @@ module OverlayPublisher
     private
 
     def redis
-      @redis || ::Redis.new(host: App.settings.redis['service_host'], port: App.settings.redis['port'])
+      @redis ||= ::Redis.new(host: App.settings.redis['service_host'], port: App.settings.redis['port'])
     end
   end
 end
