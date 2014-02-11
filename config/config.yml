@@ -1,16 +1,13 @@
 development: &common_settings
-  publish_url: 'http://localhost:4567/publish'
+  publish_url: 'http://stesaam0.corp.w3data.com:4567/publish'
   redis:
     service_port: 6379
     default_timeout: 30
-    service_address: 'localhost'
-  github:
-    endpoint: 'https://github.dev.pages/api/v3'
-    site: 'https://github.dev.pages'
-    auth: 'githubServiceAccess:2hGn_rApLf0biDzpZF1kiM21iX1ZU_-A'
+    service_host: 'localhost'
 
 test:
   <<: *common_settings
+  publish_url: 'http://test.com/publish'
 
 production:
-  publish_url: http://localhost:4567/publish
+  publish_url: http://production.com/publish
