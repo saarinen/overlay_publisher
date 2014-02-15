@@ -46,8 +46,32 @@ describe OverlayPublisher::App do
       payload.to_json
     end
 
+    let(:response) do
+      [
+        {
+          "url" => "https://api.github.com/repos/octocat/Hello-World/hooks/1",
+          "updated_at" => "2011-09-06T20:39:23Z",
+          "created_at" => "2011-09-06T17:26:27Z",
+          "name" => "web",
+          "events" => [
+            "push",
+            "pull_request"
+          ],
+          "active" => true,
+          "config" => {
+            "url" => "http://example.com",
+            "content_type" => "json"
+          },
+          "id" => 1
+        }
+      ].to_json
+    end
+
     it "should be successfull on valid call" do
-      allow(OverlayPublisher::Github).to receive(:register_webhooks).and_return(true)
+      stub_request(:any, "http://user:pass@api.github.com/repos/test_org/test_repo/hooks").
+        to_return(:status => 200, :body => response, :headers => {})
+
+      allow(OverlayPublisher::Github.any_instance).to receive(:register_webhooks).and_return(true)
       post '/register', payload
       last_response.should be_ok
     end
@@ -57,7 +81,10 @@ describe OverlayPublisher::App do
     end
 
     it 'should receive key in response' do
-      allow(OverlayPublisher::Github).to receive(:register_webhooks).and_return(true)
+      stub_request(:any, "http://user:pass@api.github.com/repos/test_org/test_repo/hooks").
+        to_return(:status => 200, :body => response, :headers => {})
+
+      allow(OverlayPublisher::Github.any_instance).to receive(:register_webhooks).and_return(true)
       post '/register', payload
       last_response.should be_ok
       response = JSON.parse(last_response.body)

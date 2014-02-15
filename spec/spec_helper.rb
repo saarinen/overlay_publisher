@@ -2,6 +2,8 @@ require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
 require 'sinatra'
 require 'rack/test'
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
 
 Dir["../lib/**/*.rb"].each { |f| require f }
 
@@ -17,4 +19,5 @@ end
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods
+  config.include WebMock::API
 end

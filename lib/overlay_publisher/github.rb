@@ -2,7 +2,7 @@ require 'github_api'
 
 module OverlayPublisher
   class Github
-    def self.register_webhooks(repo_config, hook_url)
+    def register_webhooks(repo_config, hook_url)
       configure(repo_config)
 
       begin
@@ -19,12 +19,12 @@ module OverlayPublisher
 
     private
 
-    def self.github_repo
-      @@github ||= ::Github::Repos.new
+    def github_repo
+      @github ||= ::Github::Repos.new
     end
 
     # Configure the github api
-    def self.configure(repo_config)
+    def configure(repo_config)
       # Validate required config
       validate_config(repo_config)
 
@@ -37,7 +37,7 @@ module OverlayPublisher
       end
     end
 
-    def self.validate_config(repo_config)
+    def validate_config(repo_config)
       raise "Repository name ('repo') is required"      if (repo_config['repo'].nil?          || repo_config['repo'].empty?)
       raise "Organization is required"                  if (repo_config['organization'].nil?  || repo_config['organization'].empty?)
       raise "Authorization string ('auth') is required" if (repo_config['auth'].nil?          || repo_config['auth'].empty?)

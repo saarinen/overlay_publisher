@@ -35,7 +35,7 @@ module OverlayPublisher
     #
     post '/register' do
       repo_config = JSON.parse(request.body.gets)
-      OverlayPublisher::Github.register_webhooks(repo_config, settings.publish_url)
+      OverlayPublisher::Github.new.register_webhooks(repo_config, settings.publish_url)
       {'publish_key' => "overlay_publisher_#{repo_config['organization']}_#{repo_config['repo']}"}.to_json
     end
   end
