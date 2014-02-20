@@ -38,5 +38,10 @@ module OverlayPublisher
       OverlayPublisher::Github.new.register_webhooks(repo_config, settings.publish_url)
       {'publish_key' => "overlay_publisher_#{repo_config['organization']}_#{repo_config['repo']}"}.to_json
     end
+
+    # Monitor
+    get '/ping' do
+      'OK'
+    end
   end
 end
