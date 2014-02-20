@@ -6,6 +6,7 @@ gem 'sinatra-contrib'
 
 gem 'github_api'
 gem 'redis'
+gem 'unicorn'
 
 group :development, :test do
   gem 'byebug'
