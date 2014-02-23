@@ -12,8 +12,8 @@ module OverlayPublisher
           # register hook
           github_repo.hooks.create(repo_config['organization'], repo_config['repo'], name: 'web', active: true, config: {:url => hook_url, :content_type => 'json'})
         end
-      rescue Exception => e
-        raise "Registration of webhook for repo #{config['repo']} failed with message: #{e.message}"
+      rescue => e
+        raise "Registration of webhook for repo #{repo_config['repo']} failed with message: #{e.message}"
       end
     end
 
