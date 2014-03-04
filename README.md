@@ -28,17 +28,17 @@ OverlayPublisher is a simple rack application with two routes:
 
   * POST /register -  Applications wishing to subscribe to a GitHub repo need to post
     to '/register' with the following json body:
-    {
-      organization: repo org,
-      repo:         repository_name,
-      auth:         username:pass for authorized repo contributor
-      enpoint:      api endpoint eg. https://api.github.com or https://github.dev.pages/api/v3
-      site:         github root site eg. https://github.com or https://github.dev.pages
-    }
+        {
+          organization: repo org,
+          repo:         repository_name,
+          auth:         username:pass for authorized repo contributor
+          enpoint:      api endpoint eg. https://api.github.com or https://github.dev.pages/api/v3
+          site:         github root site eg. https://github.com or https://github.dev.pages
+        }
     The call will return the redis publish key if sucessfull and an error if not. eg.
 
-    {
-      publish_key: key
-    }
+        {
+          publish_key: key
+        }
 
   * POST /publish - The registered webhook route.  This route relays the body of the post to subscribed recipients.
