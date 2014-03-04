@@ -1,5 +1,5 @@
 development: &common_settings
-  publish_url: 'http://stesaam0.corp.w3data.com:4567/publish'
+  publish_url: 'http://fqdn.localhost:4567/publish'
   redis:
     service_port: 6379
     default_timeout: 30
